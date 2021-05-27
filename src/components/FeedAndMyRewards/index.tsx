@@ -78,8 +78,8 @@ const FeedAndMyRewards = ({ myRewards, changeUserReward }: FeedAndMyRewardsProps
                 indicatorColor="primary"
                 textColor="primary"
             >
-                <Tab label="Feed" />
-                <Tab label="My Rewards" />
+                <Tab label="Feed" aria-label="Feed"/>
+                <Tab label="My Rewards" aria-label="My Rewards"/>
             </Tabs>
             <button
                 className={classes.plusButton}

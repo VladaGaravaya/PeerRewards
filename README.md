@@ -1,6 +1,8 @@
 # PeerRewards
 Peer rewards is application that allows employees to receive and assign awards.
 
+![Front page](https://github.com/VladaGaravaya/PeerRewards/raw/main/src/images/Screenshot_1.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
