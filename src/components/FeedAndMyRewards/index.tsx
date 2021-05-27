@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles, Tab, Tabs } from "@material-ui/core";
 import { RewardItem } from "..";
+import { RewardInfo } from "../../models/RewardInfo";
+import { FEEDS } from "../../contants";
+import { getFilteredFeedsByDate, getFilteredFeedsByUser } from "../../helper";
+import AddSharpIcon from '@material-ui/icons/AddSharp';
 
 const useStyles = makeStyles({
+    feedsAndRewardsWrapp: {
+        position: "relative",
+    },
     feedWrapp: {
         width: "100%",
         minHeight: "calc(100vh - 255px)",
@@ -10,6 +17,21 @@ const useStyles = makeStyles({
         borderTop: "2px solid #a1acb9",
         padding: "10px 0",
         marginTop: 3,
+    },
+    plusButton: {
+        position: "absolute",
+        borderRadius: 80,
+        width: 80,
+        height: 80,
+        border: "2px solid #c8d1da",
+        backgroundColor: "#ffffff",
+        right: 55,
+        top: 14,
+    },
+    plusIcon: {
+        color: "#4e5b6a",
+        width: "100%",
+        height: "55%",
     },
 });
 
@@ -22,8 +44,10 @@ const FeedAndMyRewards = () => {
         setTabNum(newValue);
     };
 
+    const filteredFeeds = tabNum === 0 ? getFilteredFeedsByDate(FEEDS) : getFilteredFeedsByDate(getFilteredFeedsByUser(FEEDS, 'Jane Doe'));
+
     return (
-        <div>
+        <div className={classes.feedsAndRewardsWrapp}>
             <Tabs
                 value={tabNum}
                 onChange={handleChange}
@@ -33,56 +57,9 @@ const FeedAndMyRewards = () => {
                 <Tab label="Feed" />
                 <Tab label="My Rewards" />
             </Tabs>
+            <button className={classes.plusButton}><AddSharpIcon className={classes.plusIcon}/></button>
             <div className={classes.feedWrapp}>
-                <RewardItem reward={{
-                    id: "1",
-                    userTo: "David Greene",
-                    userBy: "John Chen",
-                    date: (new Date()).toISOString(),
-                    comment: "Big thanks for your help in helping on the outage today!!",
-                }}/>
-                <RewardItem reward={{
-                    id: "1",
-                    userTo: "David Greene",
-                    userBy: "John Chen",
-                    date: (new Date()).toISOString(),
-                    comment: "Big thanks for your help in helping on the outage today!!",
-                }}/>
-                <RewardItem reward={{
-                    id: "1",
-                    userTo: "David Greene",
-                    userBy: "John Chen",
-                    date: (new Date()).toISOString(),
-                    comment: "Big thanks for your help in helping on the outage today!!",
-                }}/>
-                <RewardItem reward={{
-                    id: "1",
-                    userTo: "David Greene",
-                    userBy: "John Chen",
-                    date: (new Date()).toISOString(),
-                    comment: "Big thanks for your help in helping on the outage today!!",
-                }}/>
-                <RewardItem reward={{
-                    id: "1",
-                    userTo: "David Greene",
-                    userBy: "John Chen",
-                    date: (new Date()).toISOString(),
-                    comment: "Big thanks for your help in helping on the outage today!!",
-                }}/>
-                <RewardItem reward={{
-                    id: "1",
-                    userTo: "David Greene",
-                    userBy: "John Chen",
-                    date: (new Date()).toISOString(),
-                    comment: "Big thanks for your help in helping on the outage today!!",
-                }}/>
-                <RewardItem reward={{
-                    id: "1",
-                    userTo: "David Greene",
-                    userBy: "John Chen",
-                    date: (new Date()).toISOString(),
-                    comment: "Big thanks for your help in helping on the outage today!!",
-                }}/>
+                {filteredFeeds.map((reward: RewardInfo) => <RewardItem key={reward.id} reward={reward} />)}
             </div>
         </div>
     );
