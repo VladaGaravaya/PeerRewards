@@ -4,7 +4,7 @@ import { UserIcon } from "..";
 
 const useStyles = makeStyles({
     userInfoSection: {
-        padding: 20,
+        padding: 16,
     },
     userCard: {
         display: "flex",
