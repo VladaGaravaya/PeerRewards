@@ -13,11 +13,15 @@ And you can add a new reward using the modal:
 
 ## Using libaries:
 
-React.JS, Material UI, Moment.js
+React.JS, Material UI, Moment.js, Typescript, Jest, React-testing-library
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Install all the dependencies.\
 
 ### `npm start`
 
