@@ -21,7 +21,7 @@ In the project directory, you can run:
 
 ### `npm install`
 
-Install all the dependencies.\
+Install all the dependencies.
 
 ### `npm start`
 
@@ -33,6 +33,5 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-
+Launches the test runner in the interactive watch mode.
 
