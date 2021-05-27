@@ -30,9 +30,9 @@ const NewRewardModal = ({
 }: NewRewardModalProps) => {
     const classes = useStyles();
 
-    const [userTo, setUserTo] = React.useState<string>();
-    const [reward, setReward] = React.useState<number>();
-    const [comment, setComment] = React.useState<string>();
+    const [userTo, setUserTo] = React.useState<string>("");
+    const [reward, setReward] = React.useState<number | string>("");
+    const [comment, setComment] = React.useState<string>("");
 
     const handleReward = (e: any) => {
         e.preventDefault();
@@ -52,9 +52,9 @@ const NewRewardModal = ({
     };
 
     const resetModal = () => {
-        setUserTo(undefined);
-        setReward(undefined);
-        setComment(undefined);
+        setUserTo("");
+        setReward("");
+        setComment("");
     };
 
     const handleClose = () => {
