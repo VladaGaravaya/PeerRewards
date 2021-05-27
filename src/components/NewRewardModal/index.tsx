@@ -60,7 +60,7 @@ const NewRewardModal = ({
     const handleClose = () => {
         onClose();
         resetModal();
-    }
+    };
 
     return (
         <Dialog maxWidth="xs" open={open} onClose={handleClose}>
@@ -74,6 +74,7 @@ const NewRewardModal = ({
                             onChange={(e: any) => setUserTo(e.target.value)}
                             variant="outlined"
                             required
+                            inputProps={{ "data-testid": "user-to-input" }}
                         >
                             {USERS.map((user: string) => (
                                 <MenuItem key={user} value={user}>
@@ -90,6 +91,7 @@ const NewRewardModal = ({
                             type="number"
                             aria-describedby="reward"
                             required
+                            inputProps={{ "data-testid": "reward-input" }}
                             onChange={(e: any) => setReward(e.target.value)}
                         />
                         {!!(reward && reward > myRewards) && <FormHelperText id="reward">You enter more than your rewards.</FormHelperText>}
@@ -97,9 +99,11 @@ const NewRewardModal = ({
                     <FormControl fullWidth variant="outlined">
                         <label className={classes.label}>Why?</label>
                         <OutlinedInput
+                            id="why"
                             multiline
                             rows={4}
                             value={comment}
+                            inputProps={{ "data-testid": "why-input" }}
                             onChange={(e: any) => setComment(e.target.value)}
                         />
                     </FormControl>
@@ -108,7 +112,7 @@ const NewRewardModal = ({
                     <Button onClick={handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button type="submit" variant="contained" color="primary" data-testid="reward-button">
                         Reward
                     </Button>
                 </DialogActions>
