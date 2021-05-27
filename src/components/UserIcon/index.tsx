@@ -3,9 +3,9 @@ import PersonSharpIcon from '@material-ui/icons/PersonSharp';
 
 const useStyles = makeStyles({
     userIconSmall: {
-        borderRadius: 30,
-        width: 30,
-        height: 30,
+        borderRadius: 60,
+        width: 60,
+        height: 60,
         backgroundColor: "#e0e6ec",
     },
     userIconLarge: {
