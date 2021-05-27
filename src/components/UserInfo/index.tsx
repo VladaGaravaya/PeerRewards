@@ -1,18 +1,14 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import { UserIcon } from "..";
 
 const useStyles = makeStyles({
-    userInfoWrapp: {
-        display: "flex",
-        width: "100%",
-    },
     userInfoSection: {
-        width: "25%",
         padding: 20,
     },
     userCard: {
         display: "flex",
+        padding: 20,
         flexDirection: "column",
         alignItems: "center",
     },
@@ -33,20 +29,20 @@ const UserInfo = ({
     const classes = useStyles();
 
     return (
-        <div className={classes.userInfoWrapp}>
-            <div className={`${classes.userInfoSection} ${classes.userCard}`}>
+        <Grid container>
+            <Grid item xs={12} sm={3} className={`${classes.userInfoSection} ${classes.userCard}`}>
                 <UserIcon size="large" />
                 <h3 className={classes.userHeader}>Jane Doe</h3>
-            </div>
-            <div className={classes.userInfoSection}>
+            </Grid>
+            <Grid item xs={6} sm={3} className={classes.userInfoSection}>
                 <h3 className={classes.userHeader}>My Rewards</h3>
                 <h1 className={classes.userHeader}>${myRewards}</h1>
-            </div>
-            <div className={classes.userInfoSection}>
+            </Grid>
+            <Grid item xs={6} sm={3} className={classes.userInfoSection}>
                 <h3 className={classes.userHeader}>Give</h3>
                 <h1 className={classes.userHeader}>${give}</h1>
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
 };
 

@@ -8,6 +8,8 @@ const useStyles = makeStyles({
     rewardWrapp: {
         display: "flex",
         width: "100%",
+        boxSizing: "border-box",
+        paddingRight: 20,
     },
     rewardIconSection: {
         padding: 13,

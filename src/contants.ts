@@ -23,4 +23,4 @@ export const FEEDS = [
     },
 ];
 
-export const users = ["David Greene", "John Chen", "Alex Brown", "Rajesh Kumar", "Jane Doe"];
+export const USERS = ["David Greene", "John Chen", "Alex Brown", "Rajesh Kumar"];

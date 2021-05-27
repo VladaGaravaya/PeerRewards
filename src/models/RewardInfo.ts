@@ -1,7 +1,8 @@
 export interface RewardInfo {
-    id: string;
+    id: string | number;
     userTo: string;
     userBy: string;
     date: string;
-    comment: string;
+    comment?: string;
+    cost?: number;
 }

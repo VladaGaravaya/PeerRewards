@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles, Tab, Tabs } from "@material-ui/core";
-import { RewardItem } from "..";
+import { NewRewardModal, RewardItem } from "..";
 import { RewardInfo } from "../../models/RewardInfo";
 import { FEEDS } from "../../contants";
 import { getFilteredFeedsByDate, getFilteredFeedsByUser } from "../../helper";
@@ -12,10 +12,11 @@ const useStyles = makeStyles({
     },
     feedWrapp: {
         width: "100%",
-        minHeight: "calc(100vh - 255px)",
+        boxSizing: "border-box",
+        minHeight: "calc(100vh - 295px)",
         backgroundColor: "#f7f9fa",
         borderTop: "2px solid #a1acb9",
-        padding: "10px 0",
+        padding: "30px 0",
         marginTop: 3,
     },
     plusButton: {
@@ -25,8 +26,12 @@ const useStyles = makeStyles({
         height: 80,
         border: "2px solid #c8d1da",
         backgroundColor: "#ffffff",
-        right: 55,
+        right: "4%",
         top: 14,
+
+        '&:hover': {
+            cursor: "pointer",
+        }
     },
     plusIcon: {
         color: "#4e5b6a",
@@ -35,16 +40,35 @@ const useStyles = makeStyles({
     },
 });
 
-const FeedAndMyRewards = () => {
+interface FeedAndMyRewardsProps {
+    myRewards: number;
+    changeUserReward: (cost: number) => void;
+}
+
+const FeedAndMyRewards = ({ myRewards, changeUserReward }: FeedAndMyRewardsProps) => {
     const classes = useStyles();
 
     const [tabNum, setTabNum] = React.useState(0);
+    const [openModal, setOpenModal] = React.useState(false);
+    const [currentFeeds, setCurrentFeeds] = React.useState<RewardInfo[]>(() => getFilteredFeedsByDate(FEEDS));
 
     const handleChange = (_event: any, newValue: number) => {
         setTabNum(newValue);
     };
 
-    const filteredFeeds = tabNum === 0 ? getFilteredFeedsByDate(FEEDS) : getFilteredFeedsByDate(getFilteredFeedsByUser(FEEDS, 'Jane Doe'));
+    const onClickOpenModal = () => setOpenModal(true);
+
+    const onCloseModal = () => setOpenModal(false);
+
+    const onAddReward = (item: RewardInfo) => {
+        setCurrentFeeds(getFilteredFeedsByDate([...currentFeeds, item]));
+        changeUserReward(item.cost!);
+        onCloseModal();
+    };
+
+    const filteredFeeds = tabNum === 0
+        ? currentFeeds
+        : getFilteredFeedsByUser(currentFeeds, 'Jane Doe');
 
     return (
         <div className={classes.feedsAndRewardsWrapp}>
@@ -57,10 +81,21 @@ const FeedAndMyRewards = () => {
                 <Tab label="Feed" />
                 <Tab label="My Rewards" />
             </Tabs>
-            <button className={classes.plusButton}><AddSharpIcon className={classes.plusIcon}/></button>
+            <button
+                className={classes.plusButton}
+                onClick={onClickOpenModal}
+            >
+                <AddSharpIcon className={classes.plusIcon}/>
+            </button>
             <div className={classes.feedWrapp}>
                 {filteredFeeds.map((reward: RewardInfo) => <RewardItem key={reward.id} reward={reward} />)}
             </div>
+            <NewRewardModal
+                open={openModal}
+                myRewards={myRewards}
+                onClose={onCloseModal}
+                onReward={onAddReward}
+            />
         </div>
     );
 };
